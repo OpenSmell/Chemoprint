@@ -109,7 +109,7 @@ We are releasing chemoprint as open source (code, specification, and this report
 ## 7. How to Contribute
 
 - **GitHub repository**: [opensmell/chemoprint](https://github.com/opensmell/chemoprint) (placeholder)
-- **Discussion**: Join our [Discord](https://discord.gg/...) or open an issue on GitHub.
+- **Discussion**: Join our [Discord](https://discord.gg/CGER3tHxbH) or open an issue on GitHub.
 - **Data**: The original dataset is available from Yuan’s Zenodo. Our generated chemoprint vectors and training logs are in the `outputs/` folder of this repo.
 
 We welcome critique, suggestions, and especially help with sensor calibration and feature engineering.
