@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chemoprint"
+version = "0.2"
+description = "29-dimensional physicochemical vector from SMILES using RDKit"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.20",
+    "rdkit>=2022.03",
+    "networkx>=2.0",
+]
+
+[tool.setuptools.packages.find]
+namespaces = false
