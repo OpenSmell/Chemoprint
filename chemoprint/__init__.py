@@ -148,10 +148,10 @@ def chemoprint_from_mixture(smiles_list, concentrations=None):
     weights /= weights.sum()
     return (vectors.T * weights).sum(axis=1)
 
-def chemoprint_from_foodb(mixture_name, foobd_csv="foodb_chemoprints.csv"):
-    if not os.path.exists(foobd_csv):
+def chemoprint_from_foodb(mixture_name, foodb_csv="foodb_chemoprints.csv"):
+    if not os.path.exists(foodb_csv):
         return None
-    df = pd.read_csv(foobd_csv, index_col=0)
+    df = pd.read_csv(foodb_csv, index_col=0)
     if mixture_name in df.index:
         return df.loc[mixture_name].values.astype(np.float32)
     return None
