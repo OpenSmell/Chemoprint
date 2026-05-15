@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+chemoprint/__init__.py
+chemoprint.egg-info/PKG-INFO
+chemoprint.egg-info/SOURCES.txt
+chemoprint.egg-info/dependency_links.txt
+chemoprint.egg-info/requires.txt
+chemoprint.egg-info/top_level.txt

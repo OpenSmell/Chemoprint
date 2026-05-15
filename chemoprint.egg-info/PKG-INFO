@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: chemoprint
+Version: 0.2
+Summary: 29-dimensional physicochemical vector from SMILES using RDKit
+Requires-Python: >=3.8
+Requires-Dist: numpy>=1.20
+Requires-Dist: rdkit>=2022.03
+Requires-Dist: networkx>=2.0
