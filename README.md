@@ -6,14 +6,14 @@
 
 **Version 1.0** – *May 2026*
 
-The chemoprint is a 29‑dimensional physicochemical vector that can be computed from a SMILES string and **predicted from sensor readings for pure compounds** (R² = 0.982 on the UCI gas sensor dataset). Its strengths are:
+The chemoprint is a 29‑dimensional physicochemical vector that can be computed from a SMILES string and **predicted from precomputed sensor features for pure compounds** (R² = 0.982 on the UCI gas sensor dataset, using 128-dim feature vectors, not raw sensor readings). Its strengths are:
 
 - **Human‑interpretable** – dimensions correspond to molecular weight, LogP, functional groups, etc.
 - **Deterministic and open** – completely defined via RDKit and MIT‑licensed code.
 - **Useful for** cheminformatics, QSAR, and pure‑gas identification.
 - **Can serve as an optional interpretability layer** for learned embeddings.
 
-It is **not** a universal interoperability standard for mixtures. For cross‑device interoperability with mixtures see the [Universal Encoder](https://github.com/opensmell/universal-encoder) and [Session-Invariance](https://github.com/opensmell/session-invariance) repos.
+It is **not** an interoperability standard for mixtures. For cross‑device work with mixtures see the [encoder](https://github.com/opensmell/encoder) and [session-invariance](https://github.com/opensmell/session-invariance) repos.
 
 ---
 
@@ -39,7 +39,7 @@ For the full list see [chemoprint.py](https://github.com/OpenSmell/Chemoprint/bl
 - **Method:** 80/20 train/test split on 13,000+ samples. Random Forest with 100 trees.
 - **Result:** **Average R² (variance‑weighted) = 0.982**. All 29 dimensions had R² > 0.97, with several perfect scores (functional group indicators).
 
-**This demonstrates that a commercial sensor array can be calibrated to output the chemoprint with high accuracy.**
+**This demonstrates that 128-dim precomputed features from a sensor array contain enough information to predict the chemoprint. Direct calibration of raw sensor readings from a commercial array has not yet been tested.**
 
 **Reproduce:** See [`validation/`](https://github.com/OpenSmell/Chemoprint/blob/main/validation) for code, dataset instructions, and full results.
 
@@ -102,15 +102,15 @@ python experiment.py
 | **Pure compound** with SMILES | `chemoprint_from_smiles(smiles)` | Near-perfect (R² ≈ 0.98 on UCI pure gases) | None. If the SMILES is valid, the chemoprint is exact. |
 | **Simple mixture** with known VOCs + concentrations | `chemoprint_from_mixture([smiles_list], [concentrations])` | Good, if VOC list is complete | Requires knowing what's in the mixture. FooDB provides this for foods. |
 | **Known food mixture** via FooDB lookup | `chemoprint_from_foodb("coffee", "foodb_chemoprints.csv")` | Good for the 44 covered substances | Covered mixtures are those in FooDB with GC-MS data. Not all foods are covered. |
-| **Complex mixture** (breath, environmental, unknown sample) | Not computable from structure alone | N/A | You'd need GC-MS to know what's in it. This is the gap the universal encoder fills. |
+| **Complex mixture** (breath, environmental, unknown sample) | Not computable from structure alone | N/A | You'd need GC-MS to know what's in it. This is the gap the session-invariant encoder aims to fill. |
 
-### When to use the universal encoder instead
+### When to use the encoder instead
 
-For unknown or complex mixtures (e.g., breath, environmental samples), the chemoprint cannot be computed from structure alone. Use the OpenSmell universal encoder (sensor → latent → chemoprint) instead. This is under development at `opensmell/universal-encoder`.
+For unknown or complex mixtures (e.g., breath, environmental samples), the chemoprint cannot be computed from structure alone. Use the OpenSmell encoder (sensor → latent → chemoprint) instead. This is under development at `opensmell/encoder`.
 
 ### Calibration limitation
 
-Six-pure-anchor calibration fails — a convex hull analysis ([`validation/convex_hull.py`](validation/convex_hull.py)) shows that six pure compounds (methanol, hexane, acetone, acetic acid, toluene, isopropanol) cover only 0.1% of 4,565 common odorants from the GoodScents database. Therefore, **using chemoprint for universal device calibration is not viable**.
+Six-pure-anchor calibration fails — a convex hull analysis ([`validation/convex_hull.py`](validation/convex_hull.py)) shows that six pure compounds (methanol, hexane, acetone, acetic acid, toluene, isopropanol) cover only 0.1% of 4,565 common odorants from the GoodScents database. Therefore, **using chemoprint for device calibration is not viable**.
 
 ---
 
