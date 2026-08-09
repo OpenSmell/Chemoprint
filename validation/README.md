@@ -22,4 +22,4 @@ This folder contains the code and results showing that a physical sensor array c
 3. Run `python experiment.py`
 
 ## Conclusion
-A commercial sensor array can predict the chemoprint of pure compounds with high accuracy. This validates the chemoprint as a hardware‑agnostic representation for digital olfaction.
+A research sensor array can predict the chemoprint of pure compounds with high accuracy, validating the chemoprint as a hardware-agnostic representation for digital olfaction. Direct calibration of raw readings from a commercial array has not yet been tested.
